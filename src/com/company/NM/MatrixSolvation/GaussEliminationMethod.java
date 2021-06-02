@@ -35,7 +35,7 @@ public class GaussEliminationMethod {
         guassMethod.printMatrix();
         guassMethod.rowOperation();
         System.out.println();
-        guassMethod.backSubstitution();
+        guassMethod.backSubstitution(guassMethod.a, guassMethod.b, guassMethod.noOfEquation);
     }
 
     void setMatrix()
@@ -90,7 +90,7 @@ public class GaussEliminationMethod {
             row++;
         }
     }
-    public void backSubstitution()
+    public void backSubstitution(float[][] a,float[] b,int noOfEquation)
     {int row =noOfEquation-1;
         while (row >=0)                  //The basic idea we using is we get value of x[i] upt backSubstitutions   a[i][i-1] amd the dividing by a[i][i] initially we initialize x=b;
         {
