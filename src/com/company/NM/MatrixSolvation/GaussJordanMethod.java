@@ -1,5 +1,6 @@
 package com.company.NM.MatrixSolvation;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GaussJordanMethod {
@@ -14,8 +15,10 @@ public class GaussJordanMethod {
         gaussMethod.setMatrix();
         gaussMethod.printMatrix();
         gaussMethod.rowOperation();
-        gaussMatrix=gaussMethod.a;
-        b=gaussMethod.b;
+        gjMethod.gaussMatrix=gaussMethod.a;
+        System.out.println(Arrays.deepToString(gaussMatrix));
+        gjMethod.b=gaussMethod.b;
+        gjMethod.gaussJordanOperations();
 
     }
     public GaussJordanMethod(int noOfEquations)
@@ -23,7 +26,7 @@ public class GaussJordanMethod {
         this.noOfEquations=noOfEquations;
     }
 
-    void gaussJordanOperations()
+    public void gaussJordanOperations()
     {
 
         int row=noOfEquations;
@@ -33,11 +36,16 @@ public class GaussJordanMethod {
         {
             for (int i = 0; i < noOfEquations; i++) {
                 float multiplier=gaussMatrix[i][row-1]/pointer;
-                for (int j = 0; j < noOfEquations; j++){
-
+                for (int j = 0; j < noOfEquations; j++)
+                {
+                    gaussMatrix[i][j]-=gaussMatrix[row-1][j]*multiplier;
                 }
+                b[i]=b[i]-b[row-1]*multiplier;
             }
         }
+        System.out.println("Hello");
+        System.out.println(Arrays.deepToString(gaussMatrix));
     }
+
 
 }

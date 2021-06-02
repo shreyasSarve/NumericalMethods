@@ -1,5 +1,6 @@
 package com.company.NM.MatrixSolvation;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GaussEliminationMethod {
@@ -34,6 +35,7 @@ public class GaussEliminationMethod {
         guassMethod.printMatrix();
         guassMethod.rowOperation();
         System.out.println();
+        guassMethod.backSubstitution();
     }
 
     void setMatrix()
@@ -71,18 +73,38 @@ public class GaussEliminationMethod {
             for (int i = row; i <noOfEquation ; i++)
             {
                 float multiplier=a[i][row-1]/pointer;
+                System.out.println();
+                System.out.println("R"+(i+1)+"-->"+"R"+(i+1)+"+"+multiplier+"R"+(row));
+
 
                 for (int j = 0; j < noOfEquation; j++)
                 {
                     a[i][j]=a[i][j]-multiplier*a[row-1][j];
                 }
                 b[i]-=b[row-1]*multiplier;
+                printMatrix();
 
             }
-            printMatrix();
-            System.out.println();
+
             pointer=a[row][row];
             row++;
+        }
+    }
+    public void backSubstitution()
+    {int row =noOfEquation-1;
+        while (row >=0)                  //The basic idea we using is we get value of x[i] upt backSubstitutions   a[i][i-1] amd the dividing by a[i][i] initially we initialize x=b;
+        {
+            x[row]=b[row];
+            for (int column = row+1; column <noOfEquation; column++)
+            {
+                x[row] -= a[row][column] * x[column];
+            }
+
+             x[row]/=a[row][row];
+            System.out.println("X"+(row+1)+"="+x[row]);
+            row--;
+
+
         }
     }
 }
